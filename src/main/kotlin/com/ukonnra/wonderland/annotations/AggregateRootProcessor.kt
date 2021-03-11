@@ -39,7 +39,10 @@ class AggregateRootProcessor : AbstractProcessor() {
 
   override fun process(annotations: MutableSet<out TypeElement>, roundEnv: RoundEnvironment): Boolean {
     val kaptKotlinGeneratedDir = processingEnv.options[KAPT_KOTLIN_GENERATED_OPTION_NAME] ?: run {
-      processingEnv.messager.printMessage(Diagnostic.Kind.ERROR, "Can't find the target directory for generated Kotlin files.")
+      processingEnv.messager.printMessage(
+        Diagnostic.Kind.ERROR,
+        "Can't find the target directory for generated Kotlin files."
+      )
       return false
     }
 
@@ -47,7 +50,7 @@ class AggregateRootProcessor : AbstractProcessor() {
       val className = it.simpleName.toString()
       val pack = processingEnv.elementUtils.getPackageOf(it).toString()
       val code = this.template.apply(mapOf("package" to pack, "className" to className))
-      File(kaptKotlinGeneratedDir, "testGenerated.kt").apply {
+      File(kaptKotlinGeneratedDir, "AggregateRoot_$className.generated.kt").apply {
         parentFile.mkdirs()
 
         writeText(code)
