@@ -78,17 +78,12 @@ tasks.test {
 }
 
 dependencies {
-  implementation(platform("org.junit:junit-bom:5.7.0"))
 
   implementation("com.google.auto.service:auto-service:${Versions.AUTO_SERVICE}")
   kapt("com.google.auto.service:auto-service:${Versions.AUTO_SERVICE}")
 
   implementation("com.github.jknack:handlebars:${Versions.HANDLEBARS}")
   api("com.fasterxml.jackson.core:jackson-databind:${Versions.JACKSON}")
-
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-  testImplementation("org.junit.jupiter:junit-jupiter-api")
-  implementation("com.github.tschuchortdev:kotlin-compile-testing:1.3.6")
 }
 
 java {
