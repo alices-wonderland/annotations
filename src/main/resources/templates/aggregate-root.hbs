@@ -1,0 +1,49 @@
+package {{package}}
+
+import java.util.UUID
+import kotlin.reflect.KProperty
+import com.fasterxml.jackson.core.JsonGenerator
+import com.fasterxml.jackson.core.JsonParser
+import com.fasterxml.jackson.databind.DeserializationContext
+import com.fasterxml.jackson.databind.SerializerProvider
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer
+import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer
+import com.ukonnra.wonderland.infrastructure.Aggregate
+import com.ukonnra.wonderland.infrastructure.AggregateCompanion
+
+@JsonSerialize(using = {{className}}Id.Serializer::class)
+@JsonDeserialize(using = {{className}}Id.Deserializer::class)
+data class {{className}}Id(private val value: String) : com.ukonnra.wonderland.infrastructure.Identifier<{{className}}Id> {
+  internal object Serializer : StdScalarSerializer<{{className}}Id>({{className}}Id::class.java) {
+    override fun serialize(value: {{className}}Id, gen: JsonGenerator, provider: SerializerProvider) {
+      gen.writeString(value.toString())
+    }
+  }
+
+  internal object Deserializer : StdScalarDeserializer<{{className}}Id>({{className}}Id::class.java) {
+    override fun deserialize(p: JsonParser, ctxt: DeserializationContext) = {{className}}Id(p.text)
+  }
+
+  constructor() : this(UUID.randomUUID().toString())
+
+  override fun compareTo(other: {{className}}Id) = other.toString().compareTo(value)
+
+  override fun toString() = value
+}
+
+data class {{className}}Aggregate(
+  val value: {{className}},
+): Aggregate<{{className}}Id> {
+  companion object: AggregateCompanion {
+    override val type: String
+    get() = "DoorKnob:{{className}}"
+  }
+
+  override val companion: AggregateCompanion
+    get() = {{className}}Aggregate
+
+  override val id: {{className}}Id
+    get() = value.id
+}
