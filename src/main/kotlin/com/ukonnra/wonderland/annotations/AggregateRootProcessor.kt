@@ -10,13 +10,11 @@ import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
 import javax.annotation.processing.SupportedOptions
-import javax.annotation.processing.SupportedSourceVersion
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.TypeElement
 import javax.tools.Diagnostic
 
 @AutoService(Processor::class)
-@SupportedSourceVersion(SourceVersion.RELEASE_11)
 @SupportedOptions(AggregateRootProcessor.KAPT_KOTLIN_GENERATED_OPTION_NAME)
 class AggregateRootProcessor : AbstractProcessor() {
   companion object {
