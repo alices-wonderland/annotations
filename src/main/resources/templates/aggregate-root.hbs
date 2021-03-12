@@ -37,7 +37,7 @@ data class {{className}}Aggregate(
 ): Aggregate<{{className}}Id> {
   companion object: AggregateCompanion {
     override val type: String
-    get() = "DoorKnob:{{className}}"
+    get() = "{{service}}:{{className}}"
   }
 
   override val companion: AggregateCompanion

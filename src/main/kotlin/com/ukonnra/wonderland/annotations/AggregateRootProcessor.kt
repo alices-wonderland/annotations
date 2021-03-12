@@ -47,7 +47,8 @@ class AggregateRootProcessor : AbstractProcessor() {
     roundEnv.getElementsAnnotatedWith(AggregateRoot::class.java).forEach {
       val className = it.simpleName.toString()
       val pack = processingEnv.elementUtils.getPackageOf(it).toString()
-      val code = this.template.apply(mapOf("package" to pack, "className" to className))
+      val service = it.getAnnotation(AggregateRoot::class.java).service
+      val code = this.template.apply(mapOf("package" to pack, "className" to className, "service" to service))
       File(kaptKotlinGeneratedDir, "AggregateRoot_$className.generated.kt").apply {
         parentFile.mkdirs()
 
