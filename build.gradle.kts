@@ -5,8 +5,8 @@ plugins {
   `maven-publish`
 
   id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
-  id("io.gitlab.arturbosch.detekt") version "1.16.0-RC2"
-  id("com.github.ben-manes.versions") version "0.36.0"
+  id("io.gitlab.arturbosch.detekt") version "1.16.0"
+  id("com.github.ben-manes.versions") version "0.38.0"
   kotlin("jvm") version "1.4.31"
   kotlin("kapt") version "1.4.31"
 }
@@ -16,7 +16,7 @@ object Versions {
   const val AUTO_SERVICE = "1.0-rc7"
   const val HANDLEBARS = "4.2.0"
   const val JACKSON = "2.12.2"
-  const val KTLINT = "0.40.0"
+  const val KTLINT = "0.41.0"
 }
 
 group = "com.ukonnra.wonderland"
@@ -78,12 +78,11 @@ tasks.test {
 }
 
 dependencies {
-
   implementation("com.google.auto.service:auto-service:${Versions.AUTO_SERVICE}")
   kapt("com.google.auto.service:auto-service:${Versions.AUTO_SERVICE}")
 
   implementation("com.github.jknack:handlebars:${Versions.HANDLEBARS}")
-  api("com.fasterxml.jackson.core:jackson-databind:${Versions.JACKSON}")
+  implementation("com.fasterxml.jackson.core:jackson-databind:${Versions.JACKSON}")
 }
 
 java {
