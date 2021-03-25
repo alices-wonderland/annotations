@@ -14,7 +14,7 @@ import com.ukonnra.wonderland.infrastructure.core.AggregateCompanion
 
 @JsonSerialize(using = {{className}}Id.Serializer::class)
 @JsonDeserialize(using = {{className}}Id.Deserializer::class)
-data class {{className}}Id(private val value: String) : com.ukonnra.wonderland.infrastructure.Identifier<{{className}}Id> {
+data class {{className}}Id(private val value: String) : com.ukonnra.wonderland.infrastructure.core.Identifier<{{className}}Id> {
   internal object Serializer : StdScalarSerializer<{{className}}Id>({{className}}Id::class.java) {
     override fun serialize(value: {{className}}Id, gen: JsonGenerator, provider: SerializerProvider) {
       gen.writeString(value.toString())
